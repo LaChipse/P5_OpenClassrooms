@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <link rel="shortcut icon" href="images/logo/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="images/logo/favicon.ico" type="image/x-icon"/> 
+    
+	<link rel="stylesheet" href="css/style.css"/>
+
+    <title>Produits</title>
+</head>
+
+<body>
+  <div class="bg-dark">
+    <div class="container">
+      <div class="row">
+        <nav class="col navbar navbar-expand-lg navbar-dark">
+          <a class="navbar-brand" href="index.html">
+            <img src="images/Logo/logo.png" width="100" height="50" alt="Info Logo" />
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="panier.html">Panier</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="my-3">Personnalisez votre produit :</h1>
+      </div>
+    </div>
+    <div class="row m-4">
+      <div class="col-4"  id="carouselParent">
+        <div id="carouselControls" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/produits/teddy_1.jpg" class="d-block w-100" alt="Teddy">
+              <div class="carousel-caption">
+                <p>Norbert</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/produits/teddy_2.jpg" class="d-block w-100" alt="Teddy">
+              <div class="carousel-caption">
+                <p>Arnold</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/produits/teddy_3.jpg" class="d-block w-100" alt="Teddy">
+              <div class="carousel-caption">
+                <p>Lanny </br> and Carl</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/produits/teddy_4.jpg" class="d-block w-100" alt="Teddy">
+              <div class="carousel-caption">
+                <p>Gustav</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img src="images/produits/teddy_5.jpg" class="d-block w-100" alt="Teddy">
+              <div class="carousel-caption">
+                <p>Garfunkel</p>
+              </div>
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Précédent</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Suivant</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-3 ml-5">
+        <div class="form-group mb-5">
+          <label for="nameTeddy" class="btn btn-info">Choisissez votre ours :</label>
+          <select class="form-control" id="nameTeddy">
+          </select>
+        </div>
+        <div class="form-group mb-5">
+          <label for="colorTeddy" class="btn btn-info">Choisissez la couleur :</label>
+          <select class="form-control" id="colorTeddy">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-danger" type="button" id="button-addon1">-</button>
+          </div>
+            <span class="input-group-text" id="teddyNumber"></span>
+          <div class="input-group-prepend">
+            <button class="btn btn-outline-danger" type="button" id="button-addon2">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-3">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">€</span>
+            </div>
+            <div>
+                <span class="input-group-text" style="width: 80px" id="priceTeddy"></span>
+            </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <button class="btn btn-success" type="button" id="addPanier">Ajouter au panier</button>
+      </div>
+      <div class="col-2">
+        <a href="panier.html"><button class="btn btn-primary" type="button">Voir le panier</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="bg-light mt-5">
+    <div class="container">
+      <div class="row pt-4 pb-3">
+        <div class="col">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item"><a href="#">À propos</a></li>
+            <li class="list-inline-item">&middot;</li>
+            <li class="list-inline-item"><a href="#">Contact</a></li>
+            <li class="list-inline-item">&middot;</li>
+            <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <script src="produit.js"></script>
+
+</body>
+</html>
