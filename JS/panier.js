@@ -1,6 +1,7 @@
 let totalPrice = document.getElementById("totalPrice");
 let deletPanier = document.getElementById("deletPanier");
-let deletPanier = document.getElementById("sendContact");
+let sendContact = document.getElementById("sendContact");
+let formContact = document.getElementsByTagName("form");
 
 /* Création fonction permettant l'importation des données du localStorage et la création d'un tableau contenant ces données */
 function createTableProduit () {
@@ -38,6 +39,12 @@ createTableProduit ();
 
 function sendContactProduit () {
 
+    const Teste = "TESTE";
 
+    sendContact.addEventListener ('click', function(e) {
 
-}
+            localStorage.setItem('testeu', Teste);
+    });
+};
+
+sendContactProduit ();

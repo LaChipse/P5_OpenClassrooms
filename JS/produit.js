@@ -116,29 +116,27 @@ function importPanier () {
 
     let countTable = [];
 
-    addPanier.addEventListener('click', function(Event) {
+    function storageProduit () {
 
+        countTable.push(teddyNumber.innerHTML);
+        countTable.push(choiceNameTeddy.value);
+        countTable.push(choiceColorTeddy.value);
+        countTable.push(choicePriceTeddy.innerHTML);
+
+        localStorage.setItem('countTable', JSON.stringify(countTable));
+    };
+
+    addPanier.addEventListener('click', function(Event) {
 
         /* Vérification de l'utilisation de localStorage.clear() sur page panier.js pour ne pas accumuler countTable */
         if (localStorage.length == 0) {
 
             countTable = [];
-
-            countTable.push(teddyNumber.innerHTML);
-            countTable.push(choiceNameTeddy.value);
-            countTable.push(choiceColorTeddy.value);
-            countTable.push(choicePriceTeddy.innerHTML);
-
-            localStorage.setItem('countTable', JSON.stringify(countTable));
+            storageProduit ();
 
         } else {
 
-            countTable.push(teddyNumber.innerHTML);
-            countTable.push(choiceNameTeddy.value);
-            countTable.push(choiceColorTeddy.value);
-            countTable.push(choicePriceTeddy.innerHTML);
-    
-            localStorage.setItem('countTable', JSON.stringify(countTable));
+            storageProduit ();
         }
     });
 };
