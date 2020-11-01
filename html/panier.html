@@ -82,7 +82,7 @@
     <div class="row">
       <div class="col-6">
         <h3 class="mb-3">Formulaire à remplir :</h3>
-        <form>
+        <form id="form">
             <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="prénom">Prénom</label>
@@ -97,24 +97,23 @@
                 <label for="adresse">Adresse</label>
                 <input type="text" required class="form-control" id="adresse">
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="cd">Code postal</label>
-                  <input type="text" required class="form-control" id="cd" pattern="^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="ville">Ville</label>
-                  <input type="text" required class="form-control" id="ville" pattern="^[A-Z][A-Za-z' -]+$">
-                </div>
+            <div class="form-group">
+                <label for="ville">Ville</label>
+                <input type="text" required class="form-control" id="ville" pattern="^[A-Z][A-Za-z' -]+$">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" required class="form-control" id="email">
             </div>
             <div>
-              <input type="submit" class="btn btn-success" value="Envoyer" formaction="confirmation.html" id="sendContact">
+              <input type="submit" class="btn btn-success" value="Valider la commande" id="sendContact">
             </div>
         </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div id="testSend"></div>
       </div>
     </div>
   </div>
