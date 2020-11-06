@@ -12,6 +12,7 @@ function get(url) {
         request.open("GET", url);
         request.onreadystatechange = function () {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                console.log(JSON.parse(this.responseText));
                 resolve(JSON.parse(this.responseText));
             };
         };
@@ -40,7 +41,7 @@ get("http://localhost:3000/api/teddies")
         }
 
         /* Modification valeurs des choix de la couleur et du prix suivant le choix de l'ours */
-        choiceNameTeddy.addEventListener('change', function(Event) {
+        choiceNameTeddy.addEventListener('click', function(Event) {
 
             optionColor = "";
 
@@ -87,28 +88,40 @@ get("http://localhost:3000/api/teddies")
 /* Création fonction permettant d'ajouter les personnalisation dans un tableau pour dans le local storage pour être utilisé par la page panier.html */
 function importPanier () {
 
+    class panier {
+        constructor(number, name, color, price){
+            this.number = number,
+            this.name = name,
+            this.color = color,
+            this.price = price
+        }
+    } ;
+    
     let countTable = [];
 
-    function storageProduit () {
-
-        countTable.push(teddyNumber.innerHTML);
-        countTable.push(choiceNameTeddy.value);
-        countTable.push(choiceColorTeddy.value);
-        countTable.push(choicePriceTeddy.innerHTML);
-
+    function storagePanier () {
+        countTable.push(new panier(teddyNumber.innerHTML, choiceNameTeddy.value, choiceColorTeddy.value, choicePriceTeddy.innerHTML));
         localStorage.setItem('countTable', JSON.stringify(countTable));
-    };
+        alert("Article ajouté au panier !");
+        console.log(localStorage.getItem('countTable'));
+        console.log(JSON.parse(localStorage.getItem('countTable')));
+    }
 
     addPanier.addEventListener('click', function(Event) {
 
-        /* Vérification de l'utilisation de localStorage.clear() sur page panier.js pour ne pas accumuler countTable */
-        if (localStorage.length == 0) {
-            countTable = [];
-            storageProduit ();
-
+        if (teddyNumber.innerHTML == 0) {
+            alert("Le nombre d'artcile ajouté est de 0 !")
         } else {
-            storageProduit ();
+
+            /* Vérification de l'utilisation de localStorage.clear() sur page panier.js pour ne pas accumuler countTable */
+            if (localStorage.length == 0) {
+                countTable = [];
+                storagePanier ();           
+
+            } else {
+                storagePanier ();
         }
+    }
     });
 };
 

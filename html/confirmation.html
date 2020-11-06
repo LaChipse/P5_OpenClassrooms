@@ -42,38 +42,43 @@
       <div class="col">
         <div class="card">
             <div class="card-body">
-              <h1 class="card-title mt-4" id="test">Merci XX pour votre achat !</h5>
-              <p class="card-text">Votre commande n°_______ sera prise en charge rapidement et envoyer sous les plus bref délai ! </br> 
+              <h1 class="card-title mt-4">Merci <span id=prénom>XX</span> <span id="nom">YY</span> pour votre achat !</h1>
+              <p class="card-text">Votre commande n°<span id="order_id">00000</span> sera prise en charge rapidement et envoyer sous les plus bref délai ! </br> 
                 Un email de confirmation vous sera envoyé prochainement.</p>
+
+          <div class="row">
+            <div class="col">
               <h5 class="card-title mt-4">Récapitulatif commande :</h5>
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Nom du produit</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Produit</th>
                     <th scope="col">Couleur</th>
-                    <th scope="col">Prix total</th>
-                  </tr>
+                    <th scope="col">Prix (€)</th>
+                    </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>2</td>
-                    <td>Norbert</td>
-                    <td>Black</td>
-                    <td>56.00 €</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Arnold</td>
-                    <td>Black</td>
-                    <td>39.00 €</td>
-                  </tr>
+                <tbody id="corpTable">
                 </tbody>
-            </table>
-                <div>
-                    <span class="input-group-text" style="width:fit-content">Total : 95.00€</span>
+              </table>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Prix total</span>
                 </div>
-              <a href="../index.html" class="btn btn-primary mt-5">Retourner aux achats</a>
+                <div>
+                  <span class="input-group-text" style="width:fit-content" id="totalPrice"></span>
+                </div>
+                <div class="input-group-prepend">
+                  <span class="input-group-text">€</span>
+                </div>
+              </div>
+            </div>
+          </div>
+              <a href="../index.html" class="btn btn-primary mt-5">Retourner au choix des articles</a>
             </div>
           </div>
       </div>

@@ -5,6 +5,7 @@ let submit = document.querySelector("#form input[type='submit']");
 let formContact = document.getElementById("form");
 
 let resultPanier = JSON.parse(localStorage.getItem('countTable'));
+console.log(resultPanier);
 
 
 /* Création fonction permettant l'importation des données du localStorage et la création d'un tableau dans le DOM contenant ces données */
@@ -12,17 +13,17 @@ function createTableProduit () {
 
     let total = 0;
 
-    for (let i = 0; i < (resultPanier.length)/4 ; i++) {
+    for (let i = 0; i < resultPanier.length ; i++) {
         
     let newTable = document.createElement("tr");
         let table = document.getElementById("corpTable");
         table.appendChild(newTable);
-        newTable.innerHTML = "<td>" + resultPanier[0 + i * 4] + "</td><td>" + resultPanier[1  + i * 4] + "</td><td>" + resultPanier[2 + i * 4] + "</td><td>" + resultPanier[3 + i * 4] + "</td>";
+        newTable.innerHTML = "<td>" + resultPanier[i].number + "</td><td>" + resultPanier[i].name + "</td><td>" + resultPanier[i].color + "</td><td>" + resultPanier[i].price + "</td>";
     };
 
     /* Transformation du DOM au niveau de l'élément "total" selon le prix de chaque produit choisi */
-    for (let i = 0; i < (resultPanier.length)/4 ; i++) {
-        let priceNumber = parseInt(resultPanier[3 + i *4]);
+    for (let i = 0; i < resultPanier.length ; i++) {
+        let priceNumber = parseInt(resultPanier[i].price);
         total += priceNumber;
         };
 
@@ -43,9 +44,9 @@ function post(url, data) {
       request.setRequestHeader("Content-Type", "application/json");
       
       request.onreadystatechange = function () {
-          if (this.readyState == XMLHttpRequest.DONE && 200 < this.status < 300) {
-              localStorage.setItem("order", JSON.stringify(this.responseText));
-              resolve(JSON.parse(this.responseText));
+          if (this.readyState == XMLHttpRequest.DONE && this.status == 400) {
+            console.log(this.responseText);
+            resolve(JSON.parse(this.responseText));
           };
       };
       request.send(JSON.stringify(data));
@@ -57,39 +58,43 @@ function post(url, data) {
 /* Foncion créant l'objet contact et products selon le choix de l'utilisateurs puis enoe via requête POST au serveur */
   submit.addEventListener('click', function(e) {
 
-    let contact = {
-      prénom : document.getElementById("prénom").value,
-      nom : document.getElementById("nom").value,
-      adresse : document.getElementById("adresse").value,
-      ville : document.getElementById("ville").value,
-      email : document.getElementById("email").value,
+    e.preventDefault();
+
+    const contact = {
+      firstname: document.getElementById("prénom").value,
+      name: document.getElementById("nom").value,
+      adress: document.getElementById("adresse").value,
+      city: document.getElementById("ville").value,
+      mail: document.getElementById("email").value,
     };
   
-    let products = [];
+    const products = [];
 
   /* Insértion valeurs id suivant les valeurs dans le panier */
-    for (let i = 0; i < (resultPanier.length)/4 ; i++) {
-      if (resultPanier[1 + i * 4] == "Norbert") {
+    for (let i = 0; i < resultPanier.length; i++) {
+      if (resultPanier[i].name == "Norbert") {
         products.push("5be9c8541c9d440000665243")
 
-      } else if (resultPanier[1 + i * 4] == "Arnold") {
+      } else if (resultPanier[i].name == "Arnold") {
         products.push("5beaa8bf1c9d440000a57d94")
   
-      } else if (resultPanier[1 + i * 4] == "Lenny and Carl") {
+      } else if (resultPanier[i].name == "Lenny and Carl") {
         products.push("5beaaa8f1c9d440000a57d95")
           
-      } else if (resultPanier[1 + i * 4] == "Gustav") {
+      } else if (resultPanier[i].name == "Gustav") {
         products.push("5beaabe91c9d440000a57d96")
   
-      } else if (resultPanier[1 + i * 4] == "Garfunkel") {
+      } else if (resultPanier[i].name == "Garfunkel") {
         products.push("5beaacd41c9d440000a57d97")
       }
     }
   
-    let commande = {
-      contact,
-      products
-    };
+    const commande = [];
+    commande.push(contact, products);
+    console.log(commande);
 
     post("http://localhost:3000/api/teddies/", commande);
+
+    
+
   });
