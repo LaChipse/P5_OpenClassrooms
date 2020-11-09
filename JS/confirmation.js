@@ -1,13 +1,22 @@
-let retour = localStorage.getItem("order");
+let prenom = document.getElementById("prénom");
+let nom = document.getElementById("nom");
+let orderId = document.getElementById("order_id");
+
+
+let retour = JSON.parse(localStorage.getItem("order"));
 console.log(retour);
-console.log(JSON.parse(retour));  
 
 let resultPanier = JSON.parse(localStorage.getItem("countTable"));
+console.log(resultPanier);  
 
 
 
 /* Création fonction permettant l'importation des données du localStorage et la création d'un tableau dans le DOM contenant ces données */
 function createTableProduit () {
+
+    prenom.innerHTML = retour.contact.firstName;
+    nom.innerHTML = retour.contact.lastName;
+    orderId.innerHTML = retour.orderId; 
 
     let total = 0;
 

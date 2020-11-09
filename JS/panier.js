@@ -4,7 +4,7 @@ let deletPanier = document.getElementById("deletPanier");
 let submit = document.querySelector("#form input[type='submit']");
 let formContact = document.getElementById("form");
 
-let resultPanier = JSON.parse(localStorage.getItem('countTable'));
+let resultPanier = JSON.parse(localStorage.getItem("countTable"));
 console.log(resultPanier);
 
 
@@ -31,7 +31,7 @@ function createTableProduit () {
 
     /* Création fonction permmettant de nettoyer le localStorage */
     deletPanier.addEventListener('click', function (e) {
-            localStorage.clear();
+            localStorage.removeItem("countTable");
         });
 };
 
@@ -44,10 +44,10 @@ function post(url, data) {
       request.setRequestHeader("Content-Type", "application/json");
       
       request.onreadystatechange = function () {
-          if (this.readyState == XMLHttpRequest.DONE && this.status == 400) {
-            console.log(this.responseText);
+          if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+            localStorage.setItem("order", this.responseText);
             resolve(JSON.parse(this.responseText));
-          };
+          }
       };
       request.send(JSON.stringify(data));
   })
@@ -58,43 +58,31 @@ function post(url, data) {
 /* Foncion créant l'objet contact et products selon le choix de l'utilisateurs puis enoe via requête POST au serveur */
   submit.addEventListener('click', function(e) {
 
-    e.preventDefault();
-
     const contact = {
-      firstname: document.getElementById("prénom").value,
-      name: document.getElementById("nom").value,
-      adress: document.getElementById("adresse").value,
+      firstName: document.getElementById("prénom").value,
+      lastName: document.getElementById("nom").value,
+      address: document.getElementById("adresse").value,
       city: document.getElementById("ville").value,
-      mail: document.getElementById("email").value,
+      email: document.getElementById("email").value,
     };
   
     const products = [];
 
   /* Insértion valeurs id suivant les valeurs dans le panier */
-    for (let i = 0; i < resultPanier.length; i++) {
-      if (resultPanier[i].name == "Norbert") {
-        products.push("5be9c8541c9d440000665243")
-
-      } else if (resultPanier[i].name == "Arnold") {
-        products.push("5beaa8bf1c9d440000a57d94")
+  resultPanier.forEach(e => {
+      products.push(e.id);
+    });
   
-      } else if (resultPanier[i].name == "Lenny and Carl") {
-        products.push("5beaaa8f1c9d440000a57d95")
-          
-      } else if (resultPanier[i].name == "Gustav") {
-        products.push("5beaabe91c9d440000a57d96")
-  
-      } else if (resultPanier[i].name == "Garfunkel") {
-        products.push("5beaacd41c9d440000a57d97")
-      }
+    const commande = {
+      contact,
+      products
     }
-  
-    const commande = [];
-    commande.push(contact, products);
+
     console.log(commande);
+    console.log(JSON.stringify(commande));
 
-    post("http://localhost:3000/api/teddies/", commande);
-
-    
-
+    post("http://localhost:3000/api/teddies/", commande)
+    .then(function(reponse) {
+      console.log(reponse)
+    });
   });
