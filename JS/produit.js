@@ -6,13 +6,12 @@ const teddyNumber = document.getElementById("teddyNumber");
 const addPanier = document.getElementById("addPanier");
 const imgChoiceTeddy = document.getElementById("img_ours");
 
+/* Récupération données sotckées */
 const ours_img = localStorage.getItem("ours_img");
 const id_teddy = JSON.parse(localStorage.getItem("article_id"));
 console.log(id_teddy);
 
-let countTable = [];
-
-/* Fonction "GET" avec promise */
+/* Fonction de requéte GET et récupération réponse avec promise */
 function get(url) {
     const promise = new Promise((resolve) => {
         let request = new XMLHttpRequest();
@@ -30,19 +29,20 @@ function get(url) {
 
 
 
-/* Fonctions effectuées une fois résultat promise */
+/* Fonctions effectuées avec la réponse suivant l'id du produit qui a été choisi page d'acceuil*/
 get("http://localhost:3000/api/teddies/" + id_teddy)
 .then(function(reponse) {
 
     for (let i = 0; i < reponse.colors.length; i++) {
 
-        /* Création div des options possibles pour le choix de l'ours selon reponse GET*/
+        /* Création élémént <option> pour le choix de la couleur de l'ours*/
         let options = document.createElement("option");
         options.classList.add("color"+ [i]);
         choiceColorTeddy.appendChild(options);
         document.querySelector(".color" + [i]).innerHTML = reponse.colors[i];
     }
 
+    /* Création élémént <img> pour avoir un eiumage de l'ours choisi */
     imgChoiceTeddy.setAttribute("src", ours_img);
     imgChoiceTeddy.setAttribute("alt", "ours en peluche");
     imgChoiceTeddy.setAttribute("style", "height: 15rem");
@@ -81,9 +81,10 @@ get("http://localhost:3000/api/teddies/" + id_teddy)
 
 
 
-function storagePanier (objet) {
-    countTable.push(new objet(teddyNumber.innerHTML, nameTeddy.innerHTML, choiceColorTeddy.value, choicePriceTeddy.innerHTML, id_teddy));
-    localStorage.setItem("countTable", JSON.stringify(countTable));
+/* Fonction pour stocker données concernant l'ours choisi, la couleur choisie, la quantité voulue et le prix */
+function storagePanier (objet, variable) {
+    variable.push(new objet(teddyNumber.innerHTML, nameTeddy.innerHTML, choiceColorTeddy.value, choicePriceTeddy.innerHTML, id_teddy));
+    localStorage.setItem("countTable", JSON.stringify(variable));
     alert("Article ajouté au panier !");
     console.log(localStorage.getItem('countTable'));
     console.log(JSON.parse(localStorage.getItem('countTable')));
@@ -91,7 +92,7 @@ function storagePanier (objet) {
 
 
 
-/* Création fonction permettant d'ajouter les personnalisation dans un tableau pour dans le local storage pour être utilisé par la page panier.html */
+/* Création fonction permettant d'ajouter les personnalisation sous forme d'objet pour le localStorage puis*/
 function importPanier () {
 
     class panier {
@@ -106,17 +107,19 @@ function importPanier () {
 
     addPanier.addEventListener('click', function(Event) {
 
+        /* Vérification du choix d'unue quantité valide (non nulle) */
         if (teddyNumber.innerHTML == 0) {
             alert("Vous n'avez pas un nombre d'article valide !")
         } else {
 
-            /* Vérification de l'utilisation de localStorage.clear() sur page panier.js pour ne pas accumuler countTable */
-            if (localStorage.length == 0) {
-                countTable = [];
-                storagePanier (panier);           
+            /* Vérification de l'utilisation de localStorage.clear() sur page panier.js */
+            if (localStorage.getItem('countTable') === null) {
+                let countTable = [];
+                storagePanier (panier, countTable);           
 
             } else {
-                storagePanier (panier);
+                let countTable = JSON.parse(localStorage.getItem('countTable'));
+                storagePanier (panier, countTable);
         }
     }
     });
