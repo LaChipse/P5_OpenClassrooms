@@ -18,7 +18,7 @@
       <div class="row">
         <nav class="col navbar navbar-expand-lg navbar-dark">
           <img src="images/Logo/logo.png" class="mr-3" width="100" height="50" alt="Info Logo" />
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div id="navbarContent" class="collapse navbar-collapse">
@@ -42,9 +42,7 @@
       </div>
     </div>
     <div class="row mt-4 mb-5">
-      <div class="col">
-        <img id="img_ours">
-        </img>
+      <div class="col" id="img_ours">
       </div>
       <div class="col-7 col-md-7 mt-3">
         <div class="form-group mb-3">
@@ -76,10 +74,10 @@
         <button class="btn btn-success" type="button" id="addPanier">Ajouter au panier</button>
       </div>
       <div class="col-4 col-md-5 col-lg-2">
-        <a href="panier.html"><button class="btn btn-primary" type="button">Voir le panier</button></a>
+        <a href="panier.html" class="btn btn-primary" role="button" aria-disabled="true">Voir le panier</a>
       </div>
       <div class="col-6 mt-3 mt-lg-0">
-        <a href="index.html"><button class="btn btn-primary" type="button">Retourner aux choix des articles</button></a>
+        <a href="index.html" class="btn btn-primary" role="button" aria-disabled="true">Retourner aux choix des articles</a>
       </div>
     </div>
   </div>

@@ -16,7 +16,6 @@ function createTableProduit () {
     let total = 0;
 
     if (resultPanier === null) {
-      alert("Votre panier est vide")
       submit.addEventListener('click', function(e) {
         e.preventDefault();
       });
@@ -38,8 +37,10 @@ function createTableProduit () {
 
       /* Création fonction permmettant de nettoyer le localStorage */
       deletPanier.addEventListener('click', function (e) {
-          localStorage.removeItem("countTable");
-          console.log(localStorage.setItem("countTable"));
+        alert("Votre panier est vide")
+        localStorage.removeItem("countTable");
+        console.log(localStorage.setItem("countTable"));
+          
       });
     }
 };

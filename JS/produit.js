@@ -3,8 +3,6 @@ const nameTeddy = document.getElementById("nameTeddy");
 const choiceColorTeddy = document.getElementById("colorTeddy");
 const choicePriceTeddy = document.getElementById("priceTeddy");
 const teddyNumber = document.getElementById("teddyNumber");
-const addPanier = document.getElementById("addPanier");
-const imgChoiceTeddy = document.getElementById("img_ours");
 
 /* Récupération données sotckées */
 const ours_img = localStorage.getItem("ours_img");
@@ -42,10 +40,13 @@ get("http://localhost:3000/api/teddies/" + id_teddy)
         document.querySelector(".color" + [i]).innerHTML = reponse.colors[i];
     }
 
-    /* Création élémént <img> pour avoir un eiumage de l'ours choisi */
-    imgChoiceTeddy.setAttribute("src", ours_img);
-    imgChoiceTeddy.setAttribute("alt", "ours en peluche");
-    imgChoiceTeddy.setAttribute("style", "height: 15rem");
+    /* Création élémént <img> pour avoir une image de l'ours choisi */
+    let imgOurs = document.createElement("img");
+    imgOurs.setAttribute("src", ours_img);
+    imgOurs.setAttribute("alt", "ours en peluche");
+    imgOurs.setAttribute("style", "height: 15rem");
+    document.getElementById("img_ours").appendChild(imgOurs);
+
 
     nameTeddy.innerHTML = reponse.name;
 
@@ -104,7 +105,7 @@ function importPanier () {
         }
     };
 
-    addPanier.addEventListener('click', function(Event) {
+    document.getElementById("addPanier").addEventListener('click', function(Event) {
 
         /* Vérification du choix d'unue quantité valide (non nulle) */
         if (teddyNumber.innerHTML == 0) {

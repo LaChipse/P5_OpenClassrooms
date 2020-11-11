@@ -1,9 +1,3 @@
-/* Variable nécessaire pour modification DOM et variable contenant tableau avec lien vers les images car non récupérables via url */
-let ca = document.getElementById("cards_article");
-let images_ours = ["images/produits/teddy_1.jpg", "images/produits/teddy_2.jpg", "images/produits/teddy_3.jpg", "images/produits/teddy_4.jpg", "images/produits/teddy_5.jpg"];
-console.log(localStorage);
-
-
 /* Fonction de requéte GET et récupération réponse avec promise */
 function get(url) {
     const promise = new Promise((resolve) => {
@@ -28,11 +22,14 @@ get("http://localhost:3000/api/teddies/")
 .then(function(reponse) {
     for (let i = 0; i < reponse.length; i++) {
 
+        /* Variable contenant tableau avec lien vers les images car non récupérables via url */
+        let images_ours = ["images/produits/teddy_1.jpg", "images/produits/teddy_2.jpg", "images/produits/teddy_3.jpg", "images/produits/teddy_4.jpg", "images/produits/teddy_5.jpg"];
+
         /* Création <div> avec la taille colonne */
         let col = document.createElement("div");
         col.classList.add("col");
         col.setAttribute("id", "col_img" + [i]);
-        ca.appendChild(col);
+        document.getElementById("cards_article").appendChild(col);
 
         /* Création <div> card */
         let cards = document.createElement("div");

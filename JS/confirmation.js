@@ -1,9 +1,3 @@
-/* Appel éléments du DOM */
-let prenom = document.getElementById("prénom");
-let nom = document.getElementById("nom");
-let orderId = document.getElementById("order_id");
-let back = document.getElementById("back");
-
 /* Appel éléments stockées*/
 let retour = JSON.parse(localStorage.getItem("order"));
 console.log(retour);
@@ -17,9 +11,9 @@ console.log(resultPanier);
 function createTableProduit () {
 
     /* Modification élément selon le nom et prénom entré dans le formulaire ainsi que le numéro commande donné par le serveur */
-    prenom.innerHTML = retour.contact.firstName;
-    nom.innerHTML = retour.contact.lastName;
-    orderId.innerHTML = retour.orderId; 
+    document.getElementById("prénom").innerHTML = retour.contact.firstName;
+    document.getElementById("nom").innerHTML = retour.contact.lastName;
+    document.getElementById("order_id").innerHTML = retour.orderId; 
 
     let total = 0;
 
@@ -40,6 +34,6 @@ function createTableProduit () {
 
 createTableProduit ();
 
-back.addEventListener('click', function(e) {
+document.getElementById("back").addEventListener('click', function(e) {
     localStorage.clear();
 });
