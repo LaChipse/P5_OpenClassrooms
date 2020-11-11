@@ -39,6 +39,7 @@ function createTableProduit () {
       /* Création fonction permmettant de nettoyer le localStorage */
       deletPanier.addEventListener('click', function (e) {
           localStorage.removeItem("countTable");
+          console.log(localStorage.setItem("countTable"));
       });
     }
 };
@@ -104,7 +105,7 @@ submit.addEventListener('click', function(e) {
         });
         
     } else {
-      alert("Champs incorrect ! Vérifier les majuscules ou la conformité du mail !")
+      alert("Champ(s) incorrect(s) ! Vérifier les majuscules ou la conformité du mail !")
     }
   }
 });

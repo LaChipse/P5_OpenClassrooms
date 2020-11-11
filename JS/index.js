@@ -1,7 +1,7 @@
 /* Variable nécessaire pour modification DOM et variable contenant tableau avec lien vers les images car non récupérables via url */
 let ca = document.getElementById("cards_article");
 let images_ours = ["images/produits/teddy_1.jpg", "images/produits/teddy_2.jpg", "images/produits/teddy_3.jpg", "images/produits/teddy_4.jpg", "images/produits/teddy_5.jpg"];
-
+console.log(localStorage);
 
 
 /* Fonction de requéte GET et récupération réponse avec promise */
@@ -11,7 +11,9 @@ function get(url) {
         request.open("GET", url);
         request.onreadystatechange = function () {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                console.log(JSON.parse(this.responseText));
                 resolve(JSON.parse(this.responseText));
+                
             };
         };
         request.send();
@@ -28,7 +30,7 @@ get("http://localhost:3000/api/teddies/")
 
         /* Création <div> avec la taille colonne */
         let col = document.createElement("div");
-        col.classList.add("col-3");
+        col.classList.add("col");
         col.setAttribute("id", "col_img" + [i]);
         ca.appendChild(col);
 
@@ -84,8 +86,6 @@ get("http://localhost:3000/api/teddies/")
         document.getElementById("link_produit" + [i]).addEventListener('click', function(e) {
             localStorage.setItem("article_id", JSON.stringify(reponse[i]._id));
             localStorage.setItem("ours_img", document.getElementById("images" + [i]).getAttribute("src"));
-            console.log(localStorage.getItem("article_id"));
-            console.log(localStorage.getItem("ours_img"));
         })
     }
 });

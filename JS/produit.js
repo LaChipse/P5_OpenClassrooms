@@ -87,7 +87,6 @@ function storagePanier (objet, variable) {
     localStorage.setItem("countTable", JSON.stringify(variable));
     alert("Article ajouté au panier !");
     console.log(localStorage.getItem('countTable'));
-    console.log(JSON.parse(localStorage.getItem('countTable')));
 }
 
 
