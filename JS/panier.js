@@ -4,7 +4,6 @@ let deletPanier = document.getElementById("deletPanier");
 let submit = document.getElementById("sendContact");
 let formContact = document.getElementById("form");
 let input = Array.prototype.slice.call(document.querySelectorAll("input"));
-console.log(input);
 
 let resultPanier = JSON.parse(localStorage.getItem("countTable"));
 console.log(resultPanier);
@@ -65,45 +64,47 @@ function post(url, data) {
   })
 };
 
-  /* Foncion créant l'objet contact avec données entrées dans le formulaire et products avec données du ou des produit(s) choisi(s) puis envoie au serveur */
-  submit.addEventListener('click', function(e) {
 
-    const contact = {
-      firstName: document.getElementById("prénom").value,
-      lastName: document.getElementById("nom").value,
-      address: document.getElementById("adresse").value,
-      city: document.getElementById("ville").value,
-      email: document.getElementById("email").value,
-    };
-  
-    const products = [];
+/* Foncion créant l'objet contact avec données entrées dans le formulaire et products avec données du ou des produit(s) choisi(s) puis envoie au serveur */
+submit.addEventListener('click', function(e) {  
 
-    /* Insértion valeurs id suivant les valeurs dans le panier */
-    if (resultPanier === null) {
-      alert("Votre panier est vide")
-      } else { resultPanier.forEach(e => {
-        products.push(e.id);
-      });
-  
+  /* Insértion valeurs id suivant les valeurs dans le panier */
+  if (resultPanier === null) {
+    alert("Votre panier est vide")
+  } else { 
+    products = [];
+
+    resultPanier.forEach(e => {
+    products.push(e.id);
+    });
+     
+    if (input.every(e => e.validity.valid) && input.every(e => e != null)) {
+        
+      const contact = {
+        firstName: document.getElementById("prénom").value,
+        lastName: document.getElementById("nom").value,
+        address: document.getElementById("adresse").value,
+        city: document.getElementById("ville").value,
+        email: document.getElementById("email").value,
+      };
+
       const commande = {
         contact,
         products
       }
-
+      
       console.log(commande);
       console.log(JSON.stringify(commande));
 
       /* Appel fonction post puis après le stockage des données, on verifie la validité des champs pour ensuite être redirigé vers la page de confirmation */
       post("http://localhost:3000/api/teddies/", commande)
-      .then(function(reponse) {
-        console.log(reponse)
-          if (input.every(e => e.validity.valid)) {
-            document.location.href="confirmation.html"
-          } else if (!input[4].validity.valid) {
-              alert("Ce n'est pas un email valid");
-          } else {
-            alert("Champs incorrect. N'oublier pas les majuscules !")
-          }
-      })
+        .then(function(reponse) {
+          console.log(reponse)
+          document.location.href="confirmation.html"
+        });
+        
+    } else {
+      alert("Champs incorrect ! Vérifier les majuscules ou la conformité du mail !")
     }
-  });
+  }
+});
