@@ -24,14 +24,18 @@ function createTableProduit () {
         let newTable = document.createElement("tr");
         let table = document.getElementById("corpTable");
         table.appendChild(newTable);
-        newTable.innerHTML = "<td>" + resultPanier[i].number + "</td><td>" + resultPanier[i].name + "</td><td>" + resultPanier[i].color + "</td><td>" + resultPanier[i].price + "</td>";
-      };
-
-      /* Transformation du DOM au niveau de l'élément "total" selon le prix de chaque produit choisi */
-      for (let i = 0; i < resultPanier.length ; i++) {
+        newTable.innerHTML = "<td>" + resultPanier[i].number + "</td><td>" + resultPanier[i].name + "</td><td>" + resultPanier[i].color + "</td><td>" + resultPanier[i].price + "</td>" + "<td><a href='panier.html' role='button' aria-disabled='true' class='btn btn-danger' id='deletElem " + [i] + "'><i class='fas fa-trash-alt'></i></button></td>";
         let priceNumber = parseInt(resultPanier[i].price);
         total += priceNumber;
+
+        document.getElementById("deletElem" + " " + [i]).addEventListener('click', function(e){
+          resultPanier.splice([i], 1);
+          localStorage.setItem("countTable", JSON.stringify(resultPanier));
+          console.log(resultPanier);
+        })
       };
+
+
 
       totalPrice.innerHTML = total;
 
@@ -46,25 +50,6 @@ function createTableProduit () {
 };
 
 createTableProduit ();
-
-
-
-/* Fonction de requéte POST et récupération réponse avec promise */
-function post(url, data) {
-  return new Promise((resolve) => {
-      let request = new XMLHttpRequest();
-      request.open("POST", url + "order");
-      request.setRequestHeader("Content-Type", "application/json");
-      
-      request.onreadystatechange = function () {
-          if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
-            localStorage.setItem("order", this.responseText);
-            resolve(JSON.parse(this.responseText));
-          }
-      };
-      request.send(JSON.stringify(data));
-  })
-};
 
 
 /* Foncion créant l'objet contact avec données entrées dans le formulaire et products avec données du ou des produit(s) choisi(s) puis envoie au serveur */

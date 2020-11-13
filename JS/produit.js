@@ -9,22 +9,6 @@ const ours_img = localStorage.getItem("ours_img");
 const id_teddy = JSON.parse(localStorage.getItem("article_id"));
 console.log(id_teddy);
 
-/* Fonction de requéte GET et récupération réponse avec promise */
-function get(url) {
-    const promise = new Promise((resolve) => {
-        let request = new XMLHttpRequest();
-        request.open("GET", url);
-        request.onreadystatechange = function () {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                console.log(JSON.parse(this.responseText));
-                resolve(JSON.parse(this.responseText));
-            };
-        };
-        request.send();
-    })
-    return promise;
-};
-
 
 
 /* Fonctions effectuées avec la réponse suivant l'id du produit qui a été choisi page d'acceuil*/
@@ -83,11 +67,11 @@ get("http://localhost:3000/api/teddies/" + id_teddy)
 
 
 /* Fonction pour stocker données concernant l'ours choisi, la couleur choisie, la quantité voulue et le prix */
-function storagePanier (objet, variable) {
-    variable.push(new objet(teddyNumber.innerHTML, nameTeddy.innerHTML, choiceColorTeddy.value, choicePriceTeddy.innerHTML, id_teddy));
-    localStorage.setItem("countTable", JSON.stringify(variable));
+function storagePanier (objet, array) {
+    array.push(new objet(teddyNumber.innerHTML, nameTeddy.innerHTML, choiceColorTeddy.value, choicePriceTeddy.innerHTML, id_teddy));
+    localStorage.setItem("countTable", JSON.stringify(array));
+    console.log(localStorage.getItem("countTable"));
     alert("Article ajouté au panier !");
-    console.log(localStorage.getItem('countTable'));
 }
 
 
@@ -113,12 +97,12 @@ function importPanier () {
         } else {
 
             /* Vérification de l'utilisation de localStorage.clear() sur page panier.js */
-            if (localStorage.getItem('countTable') === null) {
+            if (localStorage.getItem("countTable") === null) {
                 let countTable = [];
                 storagePanier (panier, countTable);           
 
             } else {
-                let countTable = JSON.parse(localStorage.getItem('countTable'));
+                let countTable = JSON.parse(localStorage.getItem("countTable"));
                 storagePanier (panier, countTable);
         }
     }
