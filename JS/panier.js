@@ -91,7 +91,7 @@ submit.addEventListener('click', function(e) {
         });
         
     } else {
-      alert("Champ(s) incorrect(s) ! Vérifier les majuscules ou la conformité du mail !")
+      alert("Champ(s) incorrect(s) ! Vérifier les majuscules ou la conformité des champs !")
     }
   }
 });
