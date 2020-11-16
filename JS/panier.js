@@ -14,12 +14,7 @@ console.log(resultPanier);
 function createTableProduit () {
 
     let total = 0;
-
-    if (resultPanier === null) {
-      submit.addEventListener('click', function(e) {
-        e.preventDefault();
-      });
-    } else { 
+ 
       for(let i = 0; i < resultPanier.length ; i++) {    
         let newTable = document.createElement("tr");
         let table = document.getElementById("corpTable");
@@ -41,12 +36,11 @@ function createTableProduit () {
 
       /* Création fonction permmettant de nettoyer le localStorage */
       deletPanier.addEventListener('click', function (e) {
-        alert("Votre panier est vide")
+        alert("Votre panier est maintenant vide")
         localStorage.removeItem("countTable");
         console.log(localStorage.setItem("countTable"));
           
       });
-    }
 };
 
 createTableProduit ();
@@ -56,8 +50,9 @@ createTableProduit ();
 submit.addEventListener('click', function(e) {  
 
   /* Insértion valeurs id suivant les valeurs dans le panier */
-  if (resultPanier === null) {
+  if (resultPanier < 1) {
     alert("Votre panier est vide")
+    e.preventDefault();
   } else { 
     products = [];
 
@@ -90,8 +85,14 @@ submit.addEventListener('click', function(e) {
           document.location.href="confirmation.html"
         });
         
-    } else {
-      alert("Champ(s) incorrect(s) ! Vérifier les majuscules ou la conformité des champs !")
+    } else { for (let i = 0; i < input.length; i++) {
+
+        if(!input[i].validity.valid) {
+          input[i].className = ("form-control is-invalid")
+        } else {
+          input[i].className = ("form-control is-valid")
+        }
+      }
     }
   }
 });
